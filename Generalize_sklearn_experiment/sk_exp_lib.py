@@ -141,21 +141,14 @@ class module_lr:
 
     def predictor(self,class_to_predict=["ordered",], csv_result_path="result.csv",prob_stat=False):
         #load model and scaler
-        print("1")
         data_typer,data_train,data_pred = self.pandas_data_bind(column_to_predict=column_to_predict)
-        print("2")
         x_var = self.predictor_class.transform(self.data[data_train])
-        print("3")
         y_var = self.predicted_class.transform(self.data[data_pred])
         #predict
-        print("4")
         dataset = self.data[data_train]
-        print("5")
         pred = self.inverse_preprocessing(self.predicted_class,self.train_model.predict(self.y_test))
-        print("6")
         print(pred.shape)
         dataset[class_to_predict[0]]=self.inverse_preprocessing(self.predicted_class,self.train_model.predict(self.y_test))
-        print("7")
         #predict probability of class
         if prob_stat:
             prob = [[[self.inverse_preprocessing(self.predicted_class,np.array([self.train_model.classes_[i.tolist().index(h)]])),round(h*100,5)] for h in i] 
