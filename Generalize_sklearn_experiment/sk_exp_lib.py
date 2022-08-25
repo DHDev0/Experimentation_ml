@@ -91,7 +91,7 @@ class module_lr:
     def metric(self):#TODO generalize for ml classification and regression
         prediction = self.train_model.predict(self.x_test)
         true = self.inverse_preprocessing(self.predicted_class, self.y_test)
-        pred = np.array(self.inverse_preprocessing(self.predicted_class, prediction), dtype=true.dtype)
+        pred = np.array(list(self.inverse_preprocessing(self.predicted_class, prediction)), dtype = true.dtype)
         print(true.dtype,pred.dtype)
         c_matrix = confusion_matrix(true, pred)
         # classes = np.unique(true).size
